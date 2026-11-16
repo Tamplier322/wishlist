@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: wishlist-app
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: FIREBASE_PROJECT_ID
+        value: wishlist-271f9
+      - key: FIREBASE_CLIENT_EMAIL
+        sync: false
+      - key: FIREBASE_PRIVATE_KEY
+        sync: false
+      - key: FIREBASE_SERVICE_ACCOUNT
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: VAPID_PUBLIC_KEY
+        value: BD3Eb15yYRl9aWs_8fPKxNj99C23OrziKWm0XzgcgHIjhpcLC-vafXy-EWgnK46WL-lTg-jHM1UpYFk3C9wQg_I
+      - key: VAPID_PRIVATE_KEY
+        value: cKTzfmVgsbdnH6YMBm9jElVUcpPfj60N0d5pJPLHl58
+      - key: UPLOADS_DIR
+        value: data/uploads

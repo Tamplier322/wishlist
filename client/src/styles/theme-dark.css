@@ -1,0 +1,113 @@
+[data-theme='dark'] {
+  --paper: #14161f;
+  --white: #1d2029;
+  --ink: #e9e7e2;
+  --muted: #9a97a3;
+  --faint: #6f6d78;
+  --line: #2c2f3a;
+  --line-strong: #3b3f4d;
+
+  --peach: #e08a4e;
+  --peach-deep: #f0975a;
+  --peach-soft: #2a2318;
+  --sand: #8a7a5f;
+  --sand-soft: #262420;
+  --sage: #7c8b6f;
+  --sage-soft: #20261c;
+
+  --danger: #d06a54;
+  --danger-soft: #2e1d18;
+  --success: #7fa06f;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.35), 0 18px 44px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme='dark'] body {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+[data-theme='dark'] .header,
+[data-theme='dark'] .footer,
+[data-theme='dark'] .wl-card,
+[data-theme='dark'] .wish-card,
+[data-theme='dark'] .wish-row,
+[data-theme='dark'] .members-bar,
+[data-theme='dark'] .view-toggle,
+[data-theme='dark'] .modal,
+[data-theme='dark'] .toast,
+[data-theme='dark'] .header-user,
+[data-theme='dark'] .invite-item,
+[data-theme='dark'] .invite-card,
+[data-theme='dark'] .offers-provider-row,
+[data-theme='dark'] .feature-card,
+[data-theme='dark'] .bell,
+[data-theme='dark'] .bell-panel,
+[data-theme='dark'] .comment-row,
+[data-theme='dark'] .preset-item,
+[data-theme='dark'] .context-menu {
+  background-color: var(--white);
+}
+
+[data-theme='dark'] .header {
+  background: rgba(29, 32, 41, 0.94);
+  border-color: var(--line);
+}
+
+[data-theme='dark'] .btn-primary {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #14161f;
+}
+
+[data-theme='dark'] .btn-primary:hover {
+  background: #cfcdc6;
+  border-color: #cfcdc6;
+}
+
+[data-theme='dark'] .btn-accent {
+  background: var(--peach);
+  border-color: var(--peach);
+  color: #14161f;
+}
+
+[data-theme='dark'] .btn-accent:hover {
+  background: var(--peach-deep);
+  border-color: var(--peach-deep);
+}
+
+[data-theme='dark'] .view-toggle button.active {
+  background: var(--peach-deep);
+  color: #14161f;
+}
+
+[data-theme='dark'] .category-chip.active {
+  background: var(--peach-deep);
+  border-color: var(--peach-deep);
+  color: #14161f;
+}
+
+[data-theme='dark'] .wish-card-img {
+  background: #26211c;
+}
+
+[data-theme='dark'] .rating-pill,
+[data-theme='dark'] .share-row,
+[data-theme='dark'] .invite-link-row {
+  background: #26211c;
+}
+
+[data-theme='dark'] .auth-side {
+  background: var(--peach-soft);
+  border-color: var(--line);
+}
+
+[data-theme='dark'] .auth-points .point-dot {
+  background: #322b21;
+  border-color: #4d4232;
+}
+
+[data-theme='dark'] .auth-card {
+  background: transparent;
+}
