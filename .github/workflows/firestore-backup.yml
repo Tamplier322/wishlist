@@ -1,0 +1,44 @@
+name: Firestore backup
+
+on:
+  schedule:
+    # Каждый день в 03:15 UTC.
+    - cron: '15 3 * * *'
+  workflow_dispatch:
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Export Firestore to GCS
+        env:
+          BACKUP_BUCKET: ${{ secrets.FIRESTORE_BACKUP_BUCKET }}
+          PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+        run: |
+          set -euo pipefail
+          STAMP=$(date -u +%Y-%m-%dT%H-%M-%SZ)
+          gcloud firestore export "gs://${BACKUP_BUCKET}/firestore/${STAMP}" \
+            --project "${PROJECT_ID}" \
+            --async
+
+      - name: Prune backups older than 30 days
+        env:
+          BACKUP_BUCKET: ${{ secrets.FIRESTORE_BACKUP_BUCKET }}
+        run: |
+          set -euo pipefail
+          CUTOFF=$(date -u -d '30 days ago' +%Y-%m-%d)
+          gsutil ls "gs://${BACKUP_BUCKET}/firestore/" | while read -r prefix; do
+            DAY=$(basename "$prefix" | cut -c1-10)
+            if [[ "$DAY" < "$CUTOFF" ]]; then
+              gsutil -m rm -r "$prefix" || true
+            fi
+          done

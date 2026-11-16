@@ -1,0 +1,40 @@
+module.exports = {
+  root: true,
+  env: {
+    node: true,
+    browser: true,
+    es2022: true,
+  },
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+    ecmaFeatures: { jsx: true },
+  },
+  plugins: ['@typescript-eslint'],
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
+  ignorePatterns: [
+    'node_modules',
+    'dist',
+    'build',
+    'client/dist',
+    'server/dist',
+    'client/test-results',
+    'client/playwright-report',
+    'client/public',
+    '*.cjs',
+  ],
+  rules: {
+    'no-console': 'off',
+    'no-undef': 'off',
+    'no-empty': ['error', { allowEmptyCatch: true }],
+    '@typescript-eslint/no-explicit-any': 'warn',
+    '@typescript-eslint/no-unused-vars': [
+      'warn',
+      { argsIgnorePattern: '^_', varsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' },
+    ],
+    '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/ban-ts-comment': 'warn',
+    '@typescript-eslint/no-require-imports': 'off',
+  },
+};

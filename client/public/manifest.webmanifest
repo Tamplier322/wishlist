@@ -1,0 +1,72 @@
+{
+  "id": "/",
+  "name": "Wishlist — вишлист для любых желаний",
+  "short_name": "Wishlist",
+  "description": "Вишлист для любых вещей: категории, предложения с ценами, совместные списки",
+  "lang": "ru",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait",
+  "background_color": "#faf8f4",
+  "theme_color": "#dd7a3d",
+  "categories": ["lifestyle", "shopping", "productivity"],
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/maskable-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Мои списки",
+      "short_name": "Списки",
+      "description": "Перейти к спискам желаний",
+      "url": "/dashboard",
+      "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    },
+    {
+      "name": "Гостевой список",
+      "short_name": "Гость",
+      "description": "Быстрый список без регистрации",
+      "url": "/guest",
+      "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    },
+    {
+      "name": "Профиль",
+      "short_name": "Профиль",
+      "description": "Настройки профиля и уведомлений",
+      "url": "/profile",
+      "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/pwa-screenshots/mobile.png",
+      "sizes": "720x1280",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Списки желаний на телефоне"
+    },
+    {
+      "src": "/pwa-screenshots/desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Вишлист на большом экране"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+rules_version = '2';
+
+// Доступ к данным идёт только через сервер (Firebase Admin SDK),
+// который проверяет JWT и права участников списка.
+// Клиентский SDK не используется, поэтому любые прямые запросы из браузера
+// должны быть запрещены: иначе данные можно читать в обход API.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

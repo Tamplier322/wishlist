@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies (server + client)
+        run: npm install
+
+      - name: Lint (ESLint)
+        run: npm run lint
+
+      - name: Format check (Prettier, новые файлы)
+        run: npm run format:check
+
+      - name: Typecheck + build
+        run: npm run build
+
+      - name: Contracts check (zod → client types)
+        run: npm run contracts:check
+
+      - name: Unit tests (vitest)
+        run: npm test
+
+      - name: Install Playwright browsers
+        run: cd client && npx playwright install --with-deps chromium
+
+      - name: E2E tests
+        run: cd client && npx playwright test --reporter=line

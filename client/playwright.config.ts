@@ -1,0 +1,34 @@
+import { defineConfig } from '@playwright/test';
+
+export default defineConfig({
+  testDir: './e2e',
+  timeout: 60_000,
+  retries: 1,
+  snapshotPathTemplate: '{testDir}/__screenshots__/{arg}{ext}',
+  expect: {
+    toHaveScreenshot: {
+      maxDiffPixelRatio: 0.02,
+      animations: 'disabled',
+    },
+  },
+  use: {
+    baseURL: 'http://localhost:5173',
+    viewport: { width: 1280, height: 800 },
+    trace: 'on-first-retry',
+  },
+  webServer: [
+    {
+      command: 'npm run dev',
+      cwd: '../server',
+      url: 'http://localhost:4000/api/health',
+      reuseExistingServer: true,
+      timeout: 60_000,
+    },
+    {
+      command: 'npm run dev',
+      url: 'http://localhost:5173',
+      reuseExistingServer: true,
+      timeout: 60_000,
+    },
+  ],
+});

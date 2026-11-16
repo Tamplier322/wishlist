@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+
+# Builds
+dist/
+build/
+
+# Playwright artifacts
+client/test-results/
+client/playwright-report/
+
+# Screenshots
+Screenshot_*.png
+screenshots/
+
+# Environment
+.env
+.env.local
+.env.production
+
+# Firebase service account (секрет!)
+firebase-service-account.json
+*service-account*.json
+render-firebase-env.txt
+
+# Локальный конспект — не часть деплоя
+CONSPECT.md
+
+# Database (local files)
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+*.sqlite
+data/
+*.pid
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json

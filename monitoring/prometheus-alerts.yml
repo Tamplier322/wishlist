@@ -1,0 +1,46 @@
+groups:
+  - name: wishlist-api
+    rules:
+      - alert: WishlistHighErrorRate
+        expr: |
+          sum(rate(wishlist_http_requests_total{status=~"5.."}[5m]))
+            /
+          clamp_min(sum(rate(wishlist_http_requests_total[5m])), 0.001)
+            > 0.05
+        for: 10m
+        labels:
+          severity: critical
+        annotations:
+          summary: 'Более 5% запросов завершаются ошибкой 5xx'
+          description: 'Проверьте /api/readyz и логи по requestId.'
+
+      - alert: WishlistHighLatency
+        expr: |
+          histogram_quantile(
+            0.95,
+            sum(rate(wishlist_http_request_duration_seconds_bucket[5m])) by (le)
+          ) > 1.5
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: 'p95 latency выше 1.5 с'
+          description: 'Возможны проблемы с БД или провайдерами предложений.'
+
+      - alert: WishlistProviderFailures
+        expr: increase(wishlist_offers_provider_errors_total[15m]) > 10
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: 'Провайдер предложений {{ $labels.provider }} часто падает'
+          description: 'Circuit breaker может быть открыт — проверьте внешний сервис.'
+
+      - alert: WishlistServiceDown
+        expr: up{job="wishlist-api"} == 0
+        for: 3m
+        labels:
+          severity: critical
+        annotations:
+          summary: 'Wishlist API недоступен'
+          description: 'Render не отвечает на /metrics уже 3 минуты.'
